@@ -1,0 +1,31 @@
+class Solution(object):
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        
+        #iterate over the list getting the products of everything to the left of each item
+
+        #iterate over the list getting the product of everything to the right of each item
+
+        productList = [1]
+
+        for i in range(len(nums)):
+
+            if i == 0:
+
+                continue
+
+            productList.append(nums[i - 1] * productList[i - 1])
+        
+        #since productList is already made, you have to use a variable because you are not initialiazing a new list
+        rightProduct = 1
+
+        for i in range(len(nums) - 1, -1, -1):
+
+            productList[i] = productList[i] * rightProduct
+            
+            rightProduct = rightProduct * nums[i]
+
+        return productList
